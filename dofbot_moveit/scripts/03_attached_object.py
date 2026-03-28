@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import rospy, sys
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     dofbot.set_max_acceleration_scaling_factor(1.0)
     # Set "up" as the target point
     # 设置"up"为目标点
-    dofbot.set_named_target("up")
+    dofbot.set_named_target("home")
     dofbot.go()
     sleep(0.5)
     # Set the height of the desktop

@@ -1,0 +1,50 @@
+<!--
+  launch/pick_and_place.launch
+
+  Launches the full pick & place demo.
+  Prerequisites:
+    • Your DOFBOT MoveIt config package must already be running (move_group).
+    • Alternatively, include the move_group launch here (see commented block).
+
+  Usage:
+    roslaunch dofbot_moveit pick_and_place.launch
+    roslaunch dofbot_moveit pick_and_place.launch sim:=true
+-->
+<launch>
+  <!-- Set sim:=true to use a simulated robot (no hardware needed) -->
+  <arg name="sim"  default="false"/>
+  <arg name="rviz" default="true"/>
+
+  <!-- ── Optional: start the DOFBOT MoveIt move_group ───────────────────────
+       Uncomment if you are NOT launching move_group separately.
+       Replace 'dofbot_moveit_config' with your actual MoveIt config package.
+
+  <include file="$(find dofbot_moveit_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution"             value="$(arg sim)"/>
+    <arg name="info"                       value="true"/>
+  </include>
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <!-- ── Optional: RViz with MoveIt plugin ──────────────────────────────────
+  <group if="$(arg rviz)">
+    <include file="$(find dofbot_moveit_config)/launch/moveit_rviz.launch">
+      <arg name="rviz_config"
+           value="$(find dofbot_moveit_config)/launch/moveit.rviz"/>
+    </include>
+  </group>
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <!-- ── Pick & Place demo node ─────────────────────────────────────────────-->
+  <node name="pick_and_place"
+        pkg="dofbot_control"
+        type="pick_and_place"
+        output="screen"
+        launch-prefix=""> <!-- add 'xterm -e' to see output in separate window -->
+
+    <!-- Tune these at launch time if needed -->
+    <param name="velocity_scaling"     value="0.4"/>
+    <param name="acceleration_scaling" value="0.3"/>
+  </node>
+
+</launch>

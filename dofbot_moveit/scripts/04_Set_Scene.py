@@ -41,7 +41,7 @@ if __name__ == "__main__":
     dofbot.set_max_acceleration_scaling_factor(1.0)
     # Set "up" as the target point
     # 设置"up"为目标点
-    dofbot.set_named_target("up")
+    dofbot.set_named_target("home")
     dofbot.go()
     sleep(0.5)
     target_joints1 = [0, -1.18, -1.17, 0.79, 0.03]
